@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "781669491677",
+    "firebase_url": "https://mysportapp-d20cc.firebaseio.com",
+    "project_id": "mysportapp-d20cc",
+    "storage_bucket": "mysportapp-d20cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781669491677:android:c8c0cb034f713c69478c34",
+        "android_client_info": {
+          "package_name": "com.android.stmx.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781669491677-h0lo7m7as9b0tsumjqq70m27cssm5kso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.stmx.myapp",
+            "certificate_hash": "6fc623740398586f0da3cb77dbb22f5276c79a4c"
+          }
+        },
+        {
+          "client_id": "781669491677-ek0r10thcf7s4crlqkqb2es81gdl1orf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApYaqnt5Z7FzDJirk2h4JOw8iYl5f6zBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781669491677-ek0r10thcf7s4crlqkqb2es81gdl1orf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
