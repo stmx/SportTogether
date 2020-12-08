@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.stmx.myapp.R
 import com.android.stmx.myapp.databinding.ItemActionListBinding
+import com.android.stmx.myapp.domain.fiture.SortAndFilter.sortByDate
 import com.android.stmx.myapp.domain.model.Action
 
 class ActionListAdapter: RecyclerView.Adapter<ActionListAdapter.ActionHolder>() {
@@ -14,13 +15,14 @@ class ActionListAdapter: RecyclerView.Adapter<ActionListAdapter.ActionHolder>() 
     private val actionList:MutableList<Action> = ArrayList()
 
     fun updateData(newActionList: List<Action>) {
-        val actionDiffUtilCallback = DiffUtilActionList(actionList,newActionList)
+        val sorted = sortByDate(newActionList.toMutableList() as ArrayList<Action>)
+        val actionDiffUtilCallback = DiffUtilActionList(actionList,sorted)
         val resultDiffUtil = DiffUtil.calculateDiff(actionDiffUtilCallback)
 //        actionList.clear()
 //        actionList.addAll(newActionList)
 //        notifyDataSetChanged()
         actionList.clear()
-        actionList.addAll(newActionList)
+        actionList.addAll(sorted)
         resultDiffUtil.dispatchUpdatesTo(this)
     }
 

@@ -8,9 +8,8 @@ import java.util.*
 data class Action(
         var id: String,
         var idOwner: String,
+        val dateTimeCreation: Date,
         val dateTime: Date,
-//        val date: String,
-//        val time: String,
         val description: String,
         val needPeople: Int,
         val payment: Int,
@@ -19,9 +18,8 @@ data class Action(
 ) {
     companion object {
         fun newInstance(
+                dateTimeCreation: Date,
                 dateTime: Date,
-//                date: String,
-//                time: String,
                 description: String,
                 needPeople: Int,
                 payment: Int,
@@ -30,9 +28,8 @@ data class Action(
         ) = Action(
                 "",
                 "",
+                dateTimeCreation,
                 dateTime,
-//                date,
-//                time,
                 description,
                 needPeople,
                 payment,
@@ -40,7 +37,6 @@ data class Action(
                 sport
         )
     }
-
 
     fun getDateString() = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT).format(dateTime)!!
     fun getTimeString() = SimpleDateFormat("HH:mm", Locale.ROOT).format(dateTime)!!

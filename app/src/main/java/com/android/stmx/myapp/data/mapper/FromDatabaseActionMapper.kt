@@ -10,6 +10,7 @@ object FromDatabaseActionMapper {
         return Action(
                 actionId,
                 action.idOwner,
+                action.dateTimeCreation,
                 action.dateTime,
                 action.description,
                 action.needPeople,
@@ -23,6 +24,7 @@ object FromDatabaseActionMapper {
 
         val actionDatabase = ActionDatabase()
         actionDatabase.idOwner = action.idOwner
+        actionDatabase.dateTimeCreation = action.dateTime
         actionDatabase.dateTime = action.dateTime
         actionDatabase.description = action.description
         actionDatabase.needPeople = action.needPeople

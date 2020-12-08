@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.stmx.myapp.R
 import com.android.stmx.myapp.databinding.FragmentActionListBinding
 import com.android.stmx.myapp.domain.model.Action
+import com.android.stmx.myapp.helper.RandomAction
 import com.android.stmx.myapp.ui.adapter.ActionListAdapter
 import com.android.stmx.myapp.ui.viewmodel.ActionListViewModel
 import java.text.DateFormat
@@ -49,10 +50,11 @@ class ActionListFragment : Fragment() {
         }
         viewModel.getDataFlowAction().observe(viewLifecycleOwner){
             actionListAdapter.updateData(it)
+            recyclerView.scrollToPosition(0)
         }
 
         binding.buttonAddRandom.setOnClickListener {
-            viewModel.addAction(Action("", viewModel.getUserId(),Date() , "deskription${Random.nextInt(0, 200)}", Random.nextInt(0, 10), Random.nextInt(100, 200), "x", "foot"))
+            viewModel.addAction(RandomAction.generateRandomAction())
         }
         binding.buttonAdd.setOnClickListener {
             requireActivity()
@@ -62,10 +64,6 @@ class ActionListFragment : Fragment() {
                     .addToBackStack(null)
                     .commit()
         }
-
-
-
-
     }
     fun getDateByString(stringDate:String):Date {
         val tz = TimeZone.getTimeZone("Europe/Moscow")
