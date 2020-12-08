@@ -38,7 +38,6 @@ data class Action(
         )
     }
 
-
     fun getDateString() = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT).format(dateTime)!!
     fun getTimeString() = SimpleDateFormat("HH:mm", Locale.ROOT).format(dateTime)!!
 
