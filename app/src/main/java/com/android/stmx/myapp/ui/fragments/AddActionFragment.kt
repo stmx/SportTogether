@@ -43,6 +43,7 @@ class AddActionFragment : Fragment() {
         binding.addTime.keyListener = null
         binding.addToFirebase.setOnClickListener {
             val action = Action.newInstance(
+                    Date(),
                     getDateTime(),
                     getDescription(),
                     getAmountPeople(),

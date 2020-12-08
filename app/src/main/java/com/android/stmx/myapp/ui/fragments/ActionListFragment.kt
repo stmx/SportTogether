@@ -49,10 +49,11 @@ class ActionListFragment : Fragment() {
         }
         viewModel.getDataFlowAction().observe(viewLifecycleOwner){
             actionListAdapter.updateData(it)
+            recyclerView.scrollToPosition(0)
         }
 
         binding.buttonAddRandom.setOnClickListener {
-            viewModel.addAction(Action("", viewModel.getUserId(),Date() , "deskription${Random.nextInt(0, 200)}", Random.nextInt(0, 10), Random.nextInt(100, 200), "x", "foot"))
+            viewModel.addAction(Action("", viewModel.getUserId(),Date() , Date(),"deskription${Random.nextInt(0, 200)}", Random.nextInt(0, 10), Random.nextInt(100, 200), "x", "foot"))
         }
         binding.buttonAdd.setOnClickListener {
             requireActivity()

@@ -32,13 +32,6 @@ class FirebaseRealtimeDatabase(private var context: Context?) {
 
     init {
         reference.child(FIREBASE_CHILD_ACTION).addChildEventListener(callback)
-//        CoroutineScope(Dispatchers.Main).launch {
-//            dataFlow
-//                    .debounce(250)
-//                    .collect {
-//                        Log.d("tag", it.toString())
-//                    }
-//        }
     }
 
 
@@ -64,13 +57,13 @@ class FirebaseRealtimeDatabase(private var context: Context?) {
     fun addAction(action: Action) {
         checkUserId()
         action.idOwner = userId
-        reference.child(FIREBASE_CHILD_ACTION).push().setValue(action)
+        reference.child(FIREBASE_CHILD_ACTION).push().setValue(FromDatabaseActionMapper.mapper(action))
     }
 
     fun updateAction(action: Action) {
         checkUserId()
         action.idOwner = userId
-        reference.child(FIREBASE_CHILD_ACTION).child(action.id).setValue(action)
+        reference.child(FIREBASE_CHILD_ACTION).child(action.id).setValue(FromDatabaseActionMapper.mapper(action))
     }
 
     suspend fun getAllAction(): List<Action> {
