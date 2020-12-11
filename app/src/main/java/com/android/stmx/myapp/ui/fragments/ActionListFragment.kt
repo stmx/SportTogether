@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.stmx.myapp.MyApp
 import com.android.stmx.myapp.R
 import com.android.stmx.myapp.databinding.FragmentActionListBinding
+import com.android.stmx.myapp.domain.fiture.SortAndFilter
 import com.android.stmx.myapp.domain.model.Action
 import com.android.stmx.myapp.helper.RandomAction
 import com.android.stmx.myapp.ui.adapter.ActionListAdapter
@@ -19,7 +20,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.random.Random
+import kotlin.collections.ArrayList
 
 class ActionListFragment : Fragment() {
 
@@ -28,9 +29,9 @@ class ActionListFragment : Fragment() {
 
     var actionListAdapter = ActionListAdapter()
     lateinit var binding: FragmentActionListBinding
-    private lateinit var recyclerView:RecyclerView
+    private lateinit var recyclerView: RecyclerView
 
-    companion object{
+    companion object {
         fun newInstance(): ActionListFragment {
             val args = Bundle()
             val fragment = ActionListFragment()
@@ -39,14 +40,19 @@ class ActionListFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_action_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MyApp.appComponent.inject(this)
-        val viewModel = ViewModelProvider(this,viewModelFactory).get(ActionListViewModel::class.java)
+        val viewModel =
+            ViewModelProvider(this, viewModelFactory).get(ActionListViewModel::class.java)
         binding = FragmentActionListBinding.bind(view)
 
 
@@ -55,7 +61,7 @@ class ActionListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = actionListAdapter
         }
-        viewModel.getDataFlowAction().observe(viewLifecycleOwner){
+        viewModel.getDataFlowAction().observe(viewLifecycleOwner) {
             actionListAdapter.updateData(it)
             recyclerView.scrollToPosition(0)
         }
@@ -63,18 +69,25 @@ class ActionListFragment : Fragment() {
         binding.buttonAddRandom.setOnClickListener {
             viewModel.addAction(RandomAction.generateRandomAction())
         }
+        binding.buttonUserAction.setOnClickListener{
+
+            val newData = SortAndFilter.filterByOwner(actionListAdapter.actionList as ArrayList<Action>,viewModel.getUserId())
+            actionListAdapter.updateData(newData)
+
+        }
         binding.buttonAdd.setOnClickListener {
             requireActivity()
-                    .supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.fragment_container,AddActionFragment.newInstance())
-                    .addToBackStack(null)
-                    .commit()
+                .supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, AddActionFragment.newInstance())
+                .addToBackStack(null)
+                .commit()
         }
     }
-    fun getDateByString(stringDate:String):Date {
+
+    fun getDateByString(stringDate: String): Date {
         val tz = TimeZone.getTimeZone("Europe/Moscow")
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm",Locale.ROOT)
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ROOT)
         dateFormat.isLenient = false
         dateFormat.timeZone = tz
         return dateFormat.parse(stringDate)!!

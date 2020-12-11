@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.android.stmx.myapp.MyApp
 import com.android.stmx.myapp.data.database.FirebaseRealtimeDatabase
 import com.android.stmx.myapp.data.repository.Repository
+import com.android.stmx.myapp.domain.fiture.SortAndFilter
 import com.android.stmx.myapp.domain.model.Action
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,8 @@ class ActionListViewModel @Inject constructor(
             repository.getDataFlowAction()
                     .debounce(250)
                     .collect {
-                        liveData.postValue(it)
+                        val defaultSorting = SortAndFilter.sortByDate(it)
+                        liveData.postValue(defaultSorting)
                     }
         }
     }

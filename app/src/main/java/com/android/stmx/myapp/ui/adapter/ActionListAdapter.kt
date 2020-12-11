@@ -12,17 +12,15 @@ import com.android.stmx.myapp.domain.model.Action
 
 class ActionListAdapter: RecyclerView.Adapter<ActionListAdapter.ActionHolder>() {
 
-    private val actionList:MutableList<Action> = ArrayList()
+    val actionList:MutableList<Action> = ArrayList()
+
+
 
     fun updateData(newActionList: List<Action>) {
-        val sorted = sortByDate(newActionList.toMutableList() as ArrayList<Action>)
-        val actionDiffUtilCallback = DiffUtilActionList(actionList,sorted)
+        val actionDiffUtilCallback = DiffUtilActionList(actionList,newActionList)
         val resultDiffUtil = DiffUtil.calculateDiff(actionDiffUtilCallback)
-//        actionList.clear()
-//        actionList.addAll(newActionList)
-//        notifyDataSetChanged()
         actionList.clear()
-        actionList.addAll(sorted)
+        actionList.addAll(newActionList)
         resultDiffUtil.dispatchUpdatesTo(this)
     }
 

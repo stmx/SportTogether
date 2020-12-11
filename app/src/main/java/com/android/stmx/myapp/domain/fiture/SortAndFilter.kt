@@ -4,6 +4,10 @@ import com.android.stmx.myapp.domain.model.Action
 
 object SortAndFilter {
 
+
+
+
+
     fun sortByDate(actionList: List<Action>, desc: Boolean = false): List<Action> = if (desc) {
         actionList.sortedWith(compareByDescending { it.dateTime })
     } else actionList.sortedWith(compareBy { it.dateTime })

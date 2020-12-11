@@ -7,6 +7,7 @@ import com.android.stmx.myapp.di.module.ViewModelModule
 import com.android.stmx.myapp.di.utils.ViewModelFactory
 import com.android.stmx.myapp.helper.UserSharedPreference
 import com.android.stmx.myapp.ui.fragments.ActionListFragment
+import com.android.stmx.myapp.ui.fragments.AddActionFragment
 import com.android.stmx.myapp.ui.viewmodel.ActionListViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -22,6 +23,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(vm: ActionListViewModel)
+    fun inject(vm:AddActionFragment)
     fun inject(vm: ActionListFragment)
     fun inject(vm: FirebaseRealtimeDatabase)
     fun inject(vm: ViewModelFactory)

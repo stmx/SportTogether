@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.android.stmx.myapp.MyApp
 import com.android.stmx.myapp.R
 import com.android.stmx.myapp.databinding.FragmentAddActionBinding
 import com.android.stmx.myapp.domain.model.Action
@@ -41,6 +42,7 @@ class AddActionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MyApp.appComponent.inject(this)
         val viewModel = ViewModelProvider(this,viewModelFactory).get(ActionListViewModel::class.java)
         binding = FragmentAddActionBinding.bind(view)
         binding.addDate.keyListener = null
