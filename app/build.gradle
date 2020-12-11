@@ -40,27 +40,31 @@ android {
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-database-ktx'
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
 
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     //noinspection LifecycleAnnotationProcessorWithJava8
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
     testImplementation "androidx.arch.core:core-testing:$arch_version"
+
+    implementation 'com.google.dagger:dagger:2.24'
+    kapt 'com.google.dagger:dagger-compiler:2.24'
 
 }

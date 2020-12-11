@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.stmx.myapp.MyApp
 import com.android.stmx.myapp.R
 import com.android.stmx.myapp.databinding.FragmentActionListBinding
 import com.android.stmx.myapp.domain.model.Action
@@ -17,9 +18,14 @@ import com.android.stmx.myapp.ui.viewmodel.ActionListViewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.random.Random
 
 class ActionListFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     var actionListAdapter = ActionListAdapter()
     lateinit var binding: FragmentActionListBinding
     private lateinit var recyclerView:RecyclerView
@@ -39,7 +45,8 @@ class ActionListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application).create(ActionListViewModel::class.java)
+        MyApp.appComponent.inject(this)
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(ActionListViewModel::class.java)
         binding = FragmentActionListBinding.bind(view)
 
 

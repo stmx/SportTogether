@@ -1,7 +1,8 @@
-package com.android.stmx.myapp
+package com.android.stmx.myapp.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.android.stmx.myapp.R
 import com.android.stmx.myapp.ui.fragments.ActionListFragment
 
 class MainActivity : AppCompatActivity() {

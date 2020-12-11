@@ -15,9 +15,13 @@ import com.android.stmx.myapp.domain.model.Action
 import com.android.stmx.myapp.ui.viewmodel.ActionListViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class AddActionFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     lateinit var binding: FragmentAddActionBinding
     private val dateAndTime = Calendar.getInstance()
@@ -37,7 +41,7 @@ class AddActionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider.AndroidViewModelFactory(requireActivity().application).create(ActionListViewModel::class.java)
+        val viewModel = ViewModelProvider(this,viewModelFactory).get(ActionListViewModel::class.java)
         binding = FragmentAddActionBinding.bind(view)
         binding.addDate.keyListener = null
         binding.addTime.keyListener = null
