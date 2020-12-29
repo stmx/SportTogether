@@ -1,8 +1,7 @@
 package com.android.stmx.myapp.data.database
 
-import android.content.SharedPreferences
 import com.android.stmx.myapp.MyApp
-import com.android.stmx.myapp.data.mapper.FromDatabaseActionMapper
+import com.android.stmx.myapp.data.mapper.ActionDatabaseMapper
 import com.android.stmx.myapp.domain.model.Action
 import com.android.stmx.myapp.domain.model.User
 import com.android.stmx.myapp.helper.UserSharedPreference
@@ -54,14 +53,14 @@ class FirebaseRealtimeDatabase @Inject constructor(
         checkUserId()
         action.idOwner = userId
         reference.child(FIREBASE_CHILD_ACTION).push()
-            .setValue(FromDatabaseActionMapper.mapper(action))
+            .setValue(ActionDatabaseMapper.mapper(action))
     }
 
     fun updateAction(action: Action) {
         checkUserId()
         action.idOwner = userId
         reference.child(FIREBASE_CHILD_ACTION).child(action.id)
-            .setValue(FromDatabaseActionMapper.mapper(action))
+            .setValue(ActionDatabaseMapper.mapper(action))
     }
 
     suspend fun getAllAction(): List<Action> {

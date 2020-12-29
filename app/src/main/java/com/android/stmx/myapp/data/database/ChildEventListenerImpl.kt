@@ -1,7 +1,7 @@
 package com.android.stmx.myapp.data.database
 
 import android.util.Log
-import com.android.stmx.myapp.data.mapper.FromDatabaseActionMapper
+import com.android.stmx.myapp.data.mapper.ActionDatabaseMapper
 import com.android.stmx.myapp.domain.model.Action
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -18,13 +18,13 @@ class ChildEventListenerImpl(
     private val data: MutableList<Action> = ArrayList()
 
     override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-        val actionItem = FromDatabaseActionMapper.mapperItemFromSnapshot(snapshot)
+        val actionItem = ActionDatabaseMapper.mapItemFromSnapshot(snapshot)
         data.add(actionItem)
         emit()
     }
 
     override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-        val actionItem = FromDatabaseActionMapper.mapperItemFromSnapshot(snapshot)
+        val actionItem = ActionDatabaseMapper.mapItemFromSnapshot(snapshot)
         data.map {
             if (it.id == actionItem.id) {
                 actionItem
@@ -34,7 +34,7 @@ class ChildEventListenerImpl(
     }
 
     override fun onChildRemoved(snapshot: DataSnapshot) {
-        val actionItem = FromDatabaseActionMapper.mapperItemFromSnapshot(snapshot)
+        val actionItem = ActionDatabaseMapper.mapItemFromSnapshot(snapshot)
         data.remove(actionItem)
         emit()
     }

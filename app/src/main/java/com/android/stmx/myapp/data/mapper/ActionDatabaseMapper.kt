@@ -4,7 +4,7 @@ import com.android.stmx.myapp.data.database.model.ActionDatabase
 import com.android.stmx.myapp.domain.model.Action
 import com.google.firebase.database.DataSnapshot
 
-object FromDatabaseActionMapper {
+object ActionDatabaseMapper {
 
     private fun mapper(action: ActionDatabase, actionId: String): Action {
         return Action(
@@ -34,7 +34,7 @@ object FromDatabaseActionMapper {
         return actionDatabase
     }
 
-    fun mapperListFromSnapshot(snapshot: DataSnapshot): List<Action> {
+    fun mapListFromSnapshot(snapshot: DataSnapshot): List<Action> {
         return snapshot
                 .children
                 .toList()
@@ -45,7 +45,7 @@ object FromDatabaseActionMapper {
                 }
     }
 
-    fun mapperItemFromSnapshot(snapshot: DataSnapshot): Action {
+    fun mapItemFromSnapshot(snapshot: DataSnapshot): Action {
         val actionDatabase = snapshot.getValue(ActionDatabase::class.java)!!
         val key = snapshot.key!!
         return mapper(actionDatabase, key)

@@ -44,18 +44,15 @@ class ActionListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_action_list, container, false)
+    ): View {
+        binding = FragmentActionListBinding.bind(inflater.inflate(R.layout.fragment_action_list, container, false))
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MyApp.appComponent.inject(this)
-        val viewModel =
-            ViewModelProvider(this, viewModelFactory).get(ActionListViewModel::class.java)
-        binding = FragmentActionListBinding.bind(view)
-
-
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(ActionListViewModel::class.java)
         recyclerView = binding.actionListRecyclerView
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -83,14 +80,6 @@ class ActionListFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-    }
-
-    fun getDateByString(stringDate: String): Date {
-        val tz = TimeZone.getTimeZone("Europe/Moscow")
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ROOT)
-        dateFormat.isLenient = false
-        dateFormat.timeZone = tz
-        return dateFormat.parse(stringDate)!!
     }
 
 }
