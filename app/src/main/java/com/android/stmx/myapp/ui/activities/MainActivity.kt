@@ -11,7 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
+// comment
     private lateinit var binding: ActivityMainBinding
     companion object{
         fun getIntent(context: Context):Intent {
