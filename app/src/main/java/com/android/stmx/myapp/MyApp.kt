@@ -7,6 +7,7 @@ import com.android.stmx.myapp.di.DaggerAppComponent
 
 class MyApp:Application() {
     //comment
+//    hsdjkfsdfs
     companion object{
         lateinit var appComponent:AppComponent
     }
